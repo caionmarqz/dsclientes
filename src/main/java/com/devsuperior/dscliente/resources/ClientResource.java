@@ -1,5 +1,7 @@
 package com.devsuperior.dscliente.resources;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -43,8 +45,8 @@ public class ClientResource {
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<ClientDTO> findById(@PathVariable("id") Long id) {
-		ClientDTO search = service.findById(id);
-		return ResponseEntity.ok(search);
+		ClientDTO client = service.findById(id);
+		return ResponseEntity.ok(client);
 	}
 	
 	@PostMapping

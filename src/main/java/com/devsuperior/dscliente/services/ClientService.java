@@ -34,8 +34,9 @@ public class ClientService {
 
 	@Transactional(readOnly = true)
 	public ClientDTO findById(Long id) {
-		Optional<Client> client  = clientRepository.findById(id);
-		Client entity = client.orElseThrow(() -> new EntityNotFoundException("Entity not found"));
+		
+		Optional<Client> obj = clientRepository.findById(id);
+		Client entity = obj.orElseThrow(() -> new ResourceNotFoundException("404 - not found"));
 		return new ClientDTO(entity);
 	}
 	
@@ -51,6 +52,7 @@ public class ClientService {
 	public ClientDTO update(Long id, ClientDTO dto) {
 		try {
 			Client client = new Client(dto);
+			client.setId(id);
 			client = clientRepository.save(client);
 			return new ClientDTO(client);
 		}
