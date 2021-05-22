@@ -51,8 +51,12 @@ public class ClientService {
 	@Transactional
 	public ClientDTO update(Long id, ClientDTO dto) {
 		try {
-			Client client = new Client(dto);
-			client.setId(id);
+			Client client = clientRepository.getOne(id);
+			client.setBirthDate(dto.getBirthDate());
+			client.setChildren(dto.getChildren());
+			client.setCpf(dto.getCpf());
+			client.setIncome(dto.getIncome());
+			client.setName(dto.getName());
 			client = clientRepository.save(client);
 			return new ClientDTO(client);
 		}
